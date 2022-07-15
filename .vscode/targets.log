@@ -1,53 +1,29 @@
 make all --print-data-base --no-builtin-variables --no-builtin-rules --question
 # GNU Make 4.2.1
- 
 # Built for x86_64-pc-linux-gnu
- 
 # Copyright (C) 1988-2016 Free Software Foundation, Inc.
- 
 # License GPLv3+: GNU GPL version 3 or later <http://gnu.org/licenses/gpl.html>
- 
 # This is free software: you are free to change and redistribute it.
- 
 # There is NO WARRANTY, to the extent permitted by law.
- 
 
- 
-# Make data base, printed on Wed Jul 13 23:49:24 2022
- 
+# Make data base, printed on Fri Jul 15 11:07:30 2022
 
 # Variables
- 
 
- 
 # 'override' directive
- 
 GNUMAKEFLAGS := 
- 
 # automatic
- 
 <D = $(patsubst %/,%,$(dir $<))
- 
 # automatic
- 
 ?F = $(notdir $?)
- 
 # environment
- 
 DESKTOP_SESSION = ubuntu
- 
 # default
- 
 .SHELLFLAGS := -c
- 
 # environment
- 
 XDG_SESSION_CLASS = user
- 
 # environment
- 
 SNAP_COMMON = /var/snap/code/common
- 
 # environment
 XDG_SESSION_TYPE = x11
 # automatic
@@ -65,7 +41,7 @@ CURDIR := /home/ariel/Desktop/Ex6-network
 # makefile
 SHELL = /bin/sh
 # environment
-SNAP_DATA = /var/snap/code/100
+SNAP_DATA = /var/snap/code/101
 # environment
 VTE_VERSION = 6003
 # environment
@@ -97,7 +73,7 @@ LESSOPEN = | /usr/bin/lesspipe %s
 # environment
 VSCODE_CWD = /home/ariel/Desktop/Ex6-network
 # environment
-GSETTINGS_SCHEMA_DIR = /snap/code/100/usr/share/glib-2.0/schemas
+GSETTINGS_SCHEMA_DIR = /snap/code/101/usr/share/glib-2.0/schemas
 # default
 MAKE_HOST := x86_64-pc-linux-gnu
 # environment
@@ -111,9 +87,9 @@ XDG_RUNTIME_DIR = /run/user/1000
 # environment
 GDK_PIXBUF_MODULE_FILE = /home/ariel/snap/code/common/.cache/gdk-pixbuf-loaders.cache
 # environment
-SNAP = /snap/code/100
+SNAP = /snap/code/101
 # environment
-SNAP_VERSION = 92d25e35
+SNAP_VERSION = b06ae3b2
 # environment
 XDG_MENU_PREFIX = gnome-
 # environment
@@ -123,7 +99,7 @@ ELECTRON_RUN_AS_NODE = 1
 # environment
 INVOCATION_ID = 2512d2179fc545d9822c971a7892874c
 # environment
-GDK_PIXBUF_MODULEDIR = /snap/code/100/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
+GDK_PIXBUF_MODULEDIR = /snap/code/101/usr/lib/x86_64-linux-gnu/gdk-pixbuf-2.0/2.10.0/loaders
 # default
 .FEATURES := target-specific order-only second-expansion else-if shortest-stem undefine oneshell archives jobserver output-sync check-symlink load
 # environment
@@ -157,7 +133,7 @@ LESSCLOSE = /usr/bin/lesspipe %s %s
 # environment
 VSCODE_CLI = 1
 # environment
-VSCODE_CODE_CACHE_PATH = /home/ariel/.config/Code/CachedData/92d25e35d9bf1a6b16f7d0758f25d48ace11e5b9
+VSCODE_CODE_CACHE_PATH = /home/ariel/.config/Code/CachedData/b06ae3b2d2dbfe28bca3134cc6be65935cdfea6a
 # environment
 LOGNAME = ariel
 # environment
@@ -191,7 +167,7 @@ MAKECMDGOALS := all
 # environment
 QT_IM_MODULE = ibus
 # environment
-SNAP_USER_DATA = /home/ariel/snap/code/100
+SNAP_USER_DATA = /home/ariel/snap/code/101
 # environment
 SHLVL = 1
 # makefile (from 'makefile', line 2)
@@ -203,7 +179,7 @@ MAKE_VERSION := 4.2.1
 # environment
 USER = ariel
 # environment
-SNAP_REVISION = 100
+SNAP_REVISION = 101
 # makefile
 .DEFAULT_GOAL := all
 # environment
@@ -219,7 +195,7 @@ MAKE_COMMAND := make
 # environment
 LANGUAGE = en_IL:en
 # environment
-VSCODE_IPC_HOOK = /run/user/1000/vscode-b25800ed-1.69.0-main.sock
+VSCODE_IPC_HOOK = /run/user/1000/vscode-b25800ed-1.69.1-main.sock
 # makefile
 MAKEFLAGS = pqrR
 # environment
@@ -247,11 +223,11 @@ LC_ALL = C
 # environment
 DBUS_STARTER_BUS_TYPE = session
 # environment
-GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/b8e08c38_afcf_4660_945a_6aca5d87973b
+GNOME_TERMINAL_SCREEN = /org/gnome/Terminal/screen/91755574_8c9c_4a43_a017_eb1ecb6402c1
 # automatic
 ^F = $(notdir $^)
 # environment
-GNOME_TERMINAL_SERVICE = :1.81
+GNOME_TERMINAL_SERVICE = :1.785
 # default
 SUFFIXES := 
 # makefile (from 'makefile', line 3)
@@ -271,7 +247,7 @@ LANG = C
 # environment
 TERM = xterm-256color
 # environment
-VSCODE_PID = 2391
+VSCODE_PID = 203073
 # environment
 DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=f222660f1091383a1d37d69a62cf2cef
 # variable set hash-table stats:
@@ -283,9 +259,9 @@ DBUS_STARTER_ADDRESS = unix:path=/run/user/1000/bus,guid=f222660f1091383a1d37d69
 
 # Directories
 
-# . (device 2053, inode 1573343): 14 files, no impossibilities.
+# . (device 2053, inode 1573343): 16 files, no impossibilities.
 
-# 14 files, no impossibilities in 1 directories.
+# 16 files, no impossibilities in 1 directories.
 
 # Implicit Rules
 
@@ -304,6 +280,7 @@ source: source.c
 #  recipe to execute (from 'makefile', line 26):
 	$(CC) $< -o source
 
+ 
 # Not a target:
 net_server.o:
 #  Implicit rule search has not been done.
@@ -325,9 +302,7 @@ client: net_client.o
 #  Modification time never checked.
 #  File has not been updated.
 #  recipe to execute (from 'makefile', line 14):
- 
 	$(CC) $< -o client
- 
 
 .PHONY: all run clean
 #  Implicit rule search has not been done.
@@ -497,12 +472,12 @@ sink.c:
 
 # No general ('VPATH' variable) search path.
 
-# strcache buffers: 1 (0) / strings = 39 / storage = 365 B / avg = 9 B
-# current buf: size = 8162 B / used = 365 B / count = 39 / avg = 9 B
+# strcache buffers: 1 (0) / strings = 40 / storage = 370 B / avg = 9 B
+# current buf: size = 8162 B / used = 370 B / count = 40 / avg = 9 B
 
-# strcache performance: lookups = 73 / hit rate = 46%
+# strcache performance: lookups = 75 / hit rate = 46%
 # hash-table stats:
-# Load=39/8192=0%, Rehash=0, Collisions=1/73=1%
-# Finished Make data base on Wed Jul 13 23:49:24 2022
+# Load=40/8192=0%, Rehash=0, Collisions=1/75=1%
+# Finished Make data base on Fri Jul 15 11:07:30 2022
 
  

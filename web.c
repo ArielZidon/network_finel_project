@@ -11,10 +11,12 @@
 #include <arpa/inet.h>
 
 #define SIM_LENGTH 10 
+// #define IP_ADDRESS "13.226.2.96" 
 #define PORT 80
 
 char* get_ip_by_hostname(char* hostname) {
   struct addrinfo* res;
+  // char* hostname;
   char* hostaddr;
   struct sockaddr_in* saddr;
 
@@ -48,12 +50,12 @@ int recognizing_url_type(char* url) {
 
 int main(int argc, char* argv[])
 { 
-  if (argc != 2) { // if an host name is not supplied from command line
-    perror("no hostname supplied\n");
-    exit(1);
-  }
+  // if (argc != 2) { // if an host name is not supplied from command line
+  //   perror("no hostname supplied\n");
+  //   exit(1);
+  // }
   
-  int sock; 
+  int sock, port; 
   struct sockaddr_in cli_name;  
   char* url = argv[1];
   char hostname[200];
@@ -67,15 +69,17 @@ int main(int argc, char* argv[])
   int how_many_colons_in_url = recognizing_url_type(url);
   if(how_many_colons_in_url == 1) {
     sscanf(url, "http://%99[^/]", hostname);
+    sscanf(argv[2], "%d", &port);
   }
   else {
-    sscanf(url, "http://%99[^:]", hostname);
+    sscanf(url, "http://%99[^:]:%99d/[^\n]", hostname, &port);
+    
   }
   ip_address = get_ip_by_hostname(hostname);
 
   printf("\nClient is alive and establishing socket connection.\n");
   
-  //creating the socket, domain is IPv4 Internet protocols, type is SOCK_STREAM and protocol is 0/
+  //creating the socket, domain is IPv4 Internet protocols, type is SOCK_STREAM and protocol is 0
   sock = socket(AF_INET, SOCK_STREAM, 0);
   if (sock < 0) // if an error was raised when creating the socket
     { perror ("Error opening channel");
@@ -84,12 +88,12 @@ int main(int argc, char* argv[])
     }
   
   bzero(&cli_name, sizeof(cli_name)); // erasing the memory from cli_name 
-  //init the attributes of cli_name/
+  //init the attributes of cli_name
   cli_name.sin_family = AF_INET; 
   cli_name.sin_addr.s_addr = inet_addr(ip_address); // IPv4 numbers-and-dots notation into binary data in network byte order
-  cli_name.sin_port = htons(PORT);
+  cli_name.sin_port = htons(port);
 
-  //if error was raised when trying to connect to the address, explain what was the problem and close the program, otherwise, connect the socket to the address/
+  //if error was raised when trying to connect to the address, explain what was the problem and close the program, otherwise, connect the socket to the address
   if (connect(sock, (struct sockaddr *)&cli_name, sizeof(cli_name)) < 0) { 
     perror ("Error establishing communications");
     close(sock);
