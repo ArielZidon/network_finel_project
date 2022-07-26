@@ -11,51 +11,49 @@
 #include <stdlib.h>
 
 int main(int argc, char* argv[]) {
-    int socket_recv, socket_send;
-    int cc, fsize;
-    struct sockaddr_in s_in, from, dest;
-    float random_number;
+    float rand = 0;
+    int socket_recv, socket_send,recv_f, rsize_f;
+    struct sockaddr_in s_came, source, dest;
     struct hostent *hostptr = gethostbyname(argv[1]);
     struct {char head; u_long  body; char tail;} msg, msgbuf;
     
-    // creates sockets
+    // Creates the "IN" and "OUT" sockets
     socket_recv = socket(AF_INET, SOCK_DGRAM, 0);
     socket_send = socket(AF_INET, SOCK_DGRAM, 0);
     
     srandom(time(0)); 
+    bzero((char *) &s_came, sizeof(s_came)); //Resetting the socket "IN"
+    s_came.sin_family = (short)AF_INET; 
+    s_came.sin_addr.s_addr = htonl(INADDR_ANY); 
+    s_came.sin_port = htons((u_short)0x3333);
+    bind(socket_recv, (struct sockaddr *)&s_came, sizeof(s_came));
 
-    bzero((char *) &s_in, sizeof(s_in));  
-    s_in.sin_family = (short)AF_INET; 
-    s_in.sin_addr.s_addr = htonl(INADDR_ANY); 
-    s_in.sin_port = htons((u_short)0x3333);
-    bind(socket_recv, (struct sockaddr *)&s_in, sizeof(s_in));
-
-    bzero((char *) &dest, sizeof(dest)); 
+    bzero((char *) &dest, sizeof(dest));//Resetting the socket "OUT"
     dest.sin_family = (short) AF_INET;
     bcopy(hostptr->h_addr, (char *)&dest.sin_addr,hostptr->h_length); 
     dest.sin_port = htons((u_short)0x3334);
     
-    for(;;) {
-        // receive from socket_recv
-        fsize = sizeof(from);
-        cc = recvfrom(socket_recv,&msg,sizeof(msg),0,(struct sockaddr *)&from,&fsize);
-        printf("received data gram\n");
+    while(1) {
+        // receive source
+        rsize_f = sizeof(source);
+        recv_f = recvfrom(socket_recv,&msg,sizeof(msg),0,(struct sockaddr *)&source,&rsize_f);
+        printf("Received data gram from source\n");
         fflush(stdout);
 
-        // sample a random number
-        random_number = ((float)random())/((float)RAND_MAX);
-        printf("the number is: %f\n", random_number);
+        // get a random number for rand
+        rand = ((float)random())/((float)RAND_MAX);
+        printf("The random number is: %f\n", rand);
         fflush(stdout);
 
-        // send data gram or discard it and wait for another
-        if (random_number > 0.5) {
-            printf("numer is greater than 0.5, send data gram\n");
+        // send data gram or block it, and wait for a new one.
+        if (rand > 0.5) {
+            printf("\t%f > 0.5 ,the data gram has been sent!\n\n",rand);
             fflush(stdout);
             sendto(socket_send,&msg,sizeof(msg),0,(struct sockaddr *)&dest,
                   sizeof(dest));
         }
         else {
-            printf("Number is smaller than 0.5, discarded data gram\n");
+            printf("\t%f < 0.5 ,the data gram has been blocked!\n\n",rand);
         }
     }
 }

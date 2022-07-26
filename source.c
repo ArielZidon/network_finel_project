@@ -11,24 +11,25 @@
 int main(int argc, char *argv[])
 {
   int socket_fd; 
+  int massege = 0;
   struct sockaddr_in  dest; 
   struct hostent *hostptr;
-  struct {int number;} msgbuf;
+  struct {int num;} msg_bufffer;
   socket_fd = socket (AF_INET, SOCK_DGRAM, 0);
   bzero((char *) &dest, sizeof(dest));
   hostptr = gethostbyname(argv[1]);  
   dest.sin_family = (short) AF_INET; 
   bcopy(hostptr->h_addr, (char *)&dest.sin_addr,hostptr->h_length);
   dest.sin_port = htons((u_short)0x3333);
-  int msg = 0;
-  for(;;) {
-    printf("send %d\n", msg);
+
+  while(1) {
+    printf("send: %d\n", massege);
     fflush(stdout);
-    msg++;
-    msgbuf.number = msg; 
-    sendto(socket_fd,&msgbuf,sizeof(msgbuf),0,(struct sockaddr *)&dest,
+    massege++;
+    msg_bufffer.num = massege; 
+    sendto(socket_fd,&msg_bufffer,sizeof(msg_bufffer),0,(struct sockaddr *)&dest,
                   sizeof(dest));
-    printf("sleeping for 1 second\n");
+    printf("\tsleep 1 second...\n");
     fflush(stdout);
     sleep(1);
   }

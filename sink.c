@@ -10,9 +10,11 @@
 #include <unistd.h>
 #include <stdio.h>
 
-void printsin(struct sockaddr_in *s, char *str1, char *str2) {
-  printf("%s:\n", str1);
-  printf("%s: ", str2);
+//Taking from the recv_udp, its make the work of print the datagram's details.. 
+void printsin(struct sockaddr_in *s, char *str1, char *str2) 
+{
+  printf("%s\n", str1);
+  printf("%s ", str2);
   char str3[30];
   strcpy(str3, (char*)inet_ntoa((struct in_addr)s->sin_addr));
   printf("ip= %s, port= %d", str3, s->sin_port);
@@ -20,27 +22,25 @@ void printsin(struct sockaddr_in *s, char *str1, char *str2) {
 }
 
 int main(int argc, char *argv[]) {
-    int socket_recv, cc, fsize; 
-    struct sockaddr_in  s_in, from;
-    struct {int number;} msg;
-
-    // creates socket
+    int socket_recv, recv_f, size; 
+    struct sockaddr_in  socket_in, source;
+    struct {int num;} message;
+    // Creates the socket
     socket_recv = socket (AF_INET, SOCK_DGRAM, 0);
-    bzero((char *) &s_in, sizeof(s_in));
-    s_in.sin_family = (short)AF_INET;
-    s_in.sin_addr.s_addr = htonl(INADDR_ANY);
-    s_in.sin_port = htons((u_short)0x3334);
-
-    //read datagram
-    bind(socket_recv, (struct sockaddr *)&s_in, sizeof(s_in));
-
-    for (;;) {
-        fsize = sizeof(from);
-        cc = recvfrom(socket_recv,&msg,sizeof(msg),0,(struct sockaddr *)&from,&fsize);
-        printsin( &from, "recv_udp: ", "Packet from:");
-        printf("Got Data: %d\n", msg.number);
+    bzero((char *) &socket_in, sizeof(socket_in));
+    socket_in.sin_family = (short)AF_INET;
+    socket_in.sin_addr.s_addr = htonl(INADDR_ANY);
+    socket_in.sin_port = htons((u_short)0x3334);
+    
+    bind(socket_recv, (struct sockaddr *)&socket_in, sizeof(socket_in));
+    //Read the datagrams
+    while(1) {
+        size = sizeof(source);
+        recv_f = recvfrom(socket_recv,&message,sizeof(message),0,(struct sockaddr *)&source,&size);
+        printsin( &source, "Recv data: ", "Packet from:");
+        printf("\tGot Data: %d\n\n", message.num);
         fflush(stdout);
     }
 }
 
-// 3 prog that work like recv udp and print the datagram
+//sink,gatewat,source are working good.
