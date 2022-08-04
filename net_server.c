@@ -12,8 +12,8 @@
 
 int main(void)
 { 
-  int sock; //init a varible to be the file descriptor number
-  int connect_sock; //init a varible to be the file descriptor number
+  int sock; //init to be the fd num
+  int connect_sock; //init to be the fd num
   struct sockaddr_in serv_name; 
   size_t len; 
   int count;
