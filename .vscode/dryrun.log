@@ -1,13 +1,20 @@
 make --dry-run --always-make --keep-going --print-directory
 make: Entering directory '/home/ariel/Desktop/Ex6-network'
+ 
 gcc -c send_udp.c -o send_udp.o
+ 
 gcc send_udp.o -o send 
+ 
 gcc -c recv_udp.c -o recv_udp.o
+ 
 gcc recv_udp.o -o recv
  
 gcc -c net_client.c -o net_client.o
+ 
 gcc net_client.o -o client
+ 
 gcc -c net_server.c -o net_server.o
+ 
 gcc net_server.o -o server
 gcc -c nslookup.c -o nslookup.o
 gcc nslookup.o -o lookup

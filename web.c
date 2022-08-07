@@ -98,6 +98,7 @@ int main(int argc, char* argv[])
   send(sock, sendL, length, 0);
   memset(recv, 0, 4096); 
   
+// "You will know all of the data has been read when the return value from the read(...) syscall is zero (indicating 0 bytes read).""
   while ((length = read(sock, recv, 4095)) > 0) //get the response from the web, write to the terminal. 
   {
     printf("%s", recv);

@@ -25,13 +25,15 @@ int main(int argc, char* argv[]) {
     bzero((char *) &s_came, sizeof(s_came)); //Resetting the socket "IN"
     s_came.sin_family = (short)AF_INET; 
     s_came.sin_addr.s_addr = htonl(INADDR_ANY); 
-    s_came.sin_port = htons((u_short)0x3333);
+    s_came.sin_port = atoi(argv[2]);
     bind(socket_recv, (struct sockaddr *)&s_came, sizeof(s_came));
 
     bzero((char *) &dest, sizeof(dest));//Resetting the socket "OUT"
     dest.sin_family = (short) AF_INET;
     bcopy(hostptr->h_addr, (char *)&dest.sin_addr,hostptr->h_length); 
-    dest.sin_port = htons((u_short)0x3334);
+    dest.sin_port = atoi(argv[2]) + 1;
+
+    printf("Recv in port %d \nSend in port %d\n\n",s_came.sin_port,dest.sin_port);
     
     while(1) {
         // receive source

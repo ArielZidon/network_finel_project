@@ -7,6 +7,7 @@
 #include <strings.h>
 #include <unistd.h>
 #include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[])
 {
@@ -20,8 +21,8 @@ int main(int argc, char *argv[])
   hostptr = gethostbyname(argv[1]);  
   dest.sin_family = (short) AF_INET; 
   bcopy(hostptr->h_addr, (char *)&dest.sin_addr,hostptr->h_length);
-  dest.sin_port = htons((u_short)0x3333);
-
+  dest.sin_port = atoi(argv[2]);
+  printf("Send in port %d\n\n",dest.sin_port);
   while(1) {
     printf("send: %d\n", massege);
     fflush(stdout);
